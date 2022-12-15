@@ -13,8 +13,6 @@ try:
         print("Selamat Datang di aplikasi BitCount,\nkelola dan maksimalkan lahan anda\ndengan bantuan kami")
         print("=="*35)
         print("")
-        # for data in contacts:
-        #     print(f"{data['NO']} \t {data['NAMA']} \t\t {data['LUAS']} \t\t {data['JENIS TANAMAN']} \t\t {data['BIBIT TANAMAN YANG DIBUTUHKAN']}")   
         print("="*70)
         print("[1] Tampilkan Data")
         print("[2] Buat Data Baru")
@@ -57,17 +55,8 @@ try:
     
     def tampilan():
         clear_screen()
-        contacts = []
-        with open(nama_csv, mode="r") as data_csv:
-            csv_reader = csv.DictReader(data_csv)
-            for row in csv_reader:
-                contacts.append(row) 
         print("-"*100)
-
-        
-
         df = pd.read_csv(nama_csv)
-
         print(df.to_string(index = False)) 
         back_to_menu()
     def inputan():
@@ -95,17 +84,12 @@ try:
             luas = int(input("masukkan luas lahan anda (m^2): "))
         except ValueError:
             inputan_salah()
-            
         jenis_tanaman = input("masukkan jenis tanaman yang ingin ditanam : ")
         try:
             jarak_antar_tanaman = int(input("masukkan jarak lebar antar tanaman(cm) : "))
-        except ValueError:
-            inputan_salah()
-        try:
             jarak_antar_tanaman1 = int(input("masukkan jarak panjang antar tanaman(cm) : "))
         except ValueError:
-            inputan_salah()
-        
+            inputan_salah() 
         jarak_antar_tanaman = jarak_antar_tanaman / 100
         jarak_antar_tanaman1 = jarak_antar_tanaman1 / 100
         jarak_antar_tanaman = jarak_antar_tanaman*jarak_antar_tanaman1
@@ -114,10 +98,6 @@ try:
         with open(nama_csv, mode='a') as data_csv:
             fieldnames = ['NO', 'NAMA', 'LUAS' , 'JENIS TANAMAN' , 'BIBIT TANAMAN YANG DIBUTUHKAN']
             writer = csv.DictWriter(data_csv, fieldnames=fieldnames)
-            nomor = nomor
-            nama = nama 
-            luas = luas
-            jenis_tanaman = jenis_tanaman
             jumlah_maksimal = int(jumlah_maksimal)
             writer.writerow({'NO': nomor, 'NAMA': nama, 'LUAS': luas , 'JENIS TANAMAN' : jenis_tanaman , 'BIBIT TANAMAN YANG DIBUTUHKAN' : jumlah_maksimal})    
         tampilan()
@@ -175,9 +155,6 @@ try:
                 jenis_tanaman = input("masukkan jenis tanaman yang ingin ditanam : ")
                 try:
                     jarak_antar_tanaman = int(input("masukkan jarak lebar antar tanaman(cm) : "))
-                except ValueError:
-                    edit_salah()
-                try:
                     jarak_antar_tanaman1 = int(input("masukkan jarak panjang antar tanaman(cm) : "))
                 except ValueError:
                     edit_salah()

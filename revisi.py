@@ -59,6 +59,7 @@ try:
         df = pd.read_csv(nama_csv)
         print(df.to_string(index = False)) 
         back_to_menu()
+        
     def inputan():
         clear_screen()
         contacts = []
